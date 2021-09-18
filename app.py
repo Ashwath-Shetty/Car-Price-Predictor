@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import pickle
+import joblib
 
 
 st.title('My first app')
@@ -171,8 +172,8 @@ categories=['Model','Prod. year','Leather interior','Engine volume','Cylinders',
    
 k=pd.DataFrame(x_t,columns=continuous+categories)
 st.write(k)
-filename = 'finalized_rfmodel.sav'
-loaded_model = pickle.load(open(filename, 'rb'))
+filename = 'test.pkl'
+loaded_model = joblib.load(filename, mmap_mode=None)
 if (st.button('predict')):
     pred=loaded_model.predict(x_t)
     st.success("price in USD {}".format(pred[0]))
